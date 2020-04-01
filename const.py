@@ -1,6 +1,8 @@
 KAFKA_TIMEOUT = 3
 KAFKA_SERVERS = []
-KAFKA_TOPIC = "TOPIC"
+KAFKA_TOPIC_ENVVAR = "kafka_topic"
+KAFKA_DEFAULT_TOPIC = "alerts_topic"
 RETRY_COUNTER = 3
-PORT_ENVVAR="parska_port"
-HOST="0.0.0.0"
+PORT_ENVVAR = "parska_port"
+DEFAULT_PORT = 5000
+HOST = "0.0.0.0"

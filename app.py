@@ -42,7 +42,8 @@ def parse_alerts(alerts):
 def insert_to_topic(alert, producer, retry_counter):
     for i in range(retry_counter):
         try:
-            producer.send(const.KAFKA_TOPIC, bytes(dumps(alert, ensure_ascii=False)))
+            producer.send(getenv(const.KAFKA_TOPIC_ENVVAR) or const.KAFKA_DEFAULT_TOPIC,
+                          bytes(dumps(alert, ensure_ascii=False)))
         except KafkaTimeoutError as kte:
             if i + 1 == retry_counter:
                 raise kte
@@ -100,7 +101,7 @@ def healthy():
 
 
 def main():
-    port = int(getenv(const.PORT_ENVVAR))
+    port = int(getenv(const.PORT_ENVVAR)) or const.DEFAULT_PORT
     app.run(host=const.HOST, port=port)
 
 
